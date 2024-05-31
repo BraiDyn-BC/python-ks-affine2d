@@ -32,8 +32,27 @@ AffineSquare  = _npt.NDArray
 AffineMatrix  = Union[AffineCompact, AffineSquare]
 
 
-def identity() -> AffineCompact:
-    return to_compact(_np.eye(3))
+class Matrix:
+    @staticmethod
+    def identity() -> AffineCompact:
+        """returns the identity affine transformation matrix"""
+        return to_compact(_np.eye(3))
+
+    @staticmethod
+    def scaler(scale: float = 1.0) -> AffineCompact:
+        """returns a transformation matrix that does scaling"""
+        return to_compact(_np.eye(3) * scale)
+
+    @staticmethod
+    def transposition() -> AffineCompact:
+        """returns a transformation matrix that does transposition"""
+        ID = Matrix.identity()
+        return ID[:, (1, 0, 2)]
+
+
+identity = Matrix.identity  # a shorthand
+scaler = Matrix.scaler  # a shorthand
+transposition = Matrix.transposition  # a shorthand
 
 
 def estimate(
