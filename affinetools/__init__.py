@@ -72,7 +72,13 @@ def to_compact(square: AffineMatrix) -> AffineCompact:
         return square
 
 
+def transpose(M: AffineMatrix) -> AffineCompact:
+    """transposes ``M`` between the x- and y- axes."""
+    return to_compact(M)[::-1, (1, 0, 2)]
+
+
 def invert(M: AffineMatrix) -> AffineCompact:
+    """computes the invert transform of ``M``"""
     return _cv2.invertAffineTransform(to_compact(M))
 
 
