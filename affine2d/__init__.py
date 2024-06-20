@@ -81,7 +81,7 @@ def to_square(compact: AffineMatrix) -> AffineSquare:
     if nrows == 3:
         return compact
     else:
-        return _np.vstack([compact, [0, 0, 1]], dtype=_np.float32)
+        return _np.vstack([compact, [0, 0, 1]]).astype(_np.float32)
 
 
 def to_compact(square: AffineMatrix) -> AffineCompact:
